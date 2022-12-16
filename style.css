@@ -1,0 +1,14 @@
+.grid-container {
+  display: grid;
+  border: 1px solid black;
+  height: 575px;
+  width: 575px;
+  float: right;
+  margin-top: 48px;
+  margin-right: 24px;
+}
+
+.grid {
+  border: 1px solid black;
+}
+

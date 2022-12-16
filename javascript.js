@@ -3,6 +3,7 @@
 // Set up grid container reference and hardcode number of grids to test
 const gridContainer = document.querySelector('.grid-container');
 const createButton = document.querySelector('.create-grid');
+const randomButton = document.querySelector('.random-color');
 let gridNumber;
 
 // Function gets user input for grid size and ensures the input is
@@ -25,19 +26,35 @@ function createGrid(num) {
     const grid = document.createElement('div');
     grid.classList.add('grid');
     grid.addEventListener('mouseover', () => {
-      grid.style.backgroundColor = 'black';
+      grid.style.backgroundColor = `${color}`;
     });
     gridContainer.appendChild(grid);
   }
 }
-
+// Function to remove each child of the gridContainer to clear grid
 function clearGrid(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
+function randomColor() {
+  const x = Math.floor(Math.random() * 256);
+  const y = Math.floor(Math.random() * 256);
+  const z = Math.floor(Math.random() * 256);
+
+  color = `rgb(${x},${y},${z})`;
+}
+
+randomButton.addEventListener('click', () => {
+  randomColor();
+  clearGrid(gridContainer);
+  getGridNumber();
+  createGrid(gridNumber);
+});
+
 createButton.addEventListener('click', () => {
+  color = 'black';
   clearGrid(gridContainer);
   getGridNumber();
   createGrid(gridNumber);
