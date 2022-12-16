@@ -1,7 +1,19 @@
 /* eslint-disable no-plusplus */
-const gridContainer = document.querySelector('.grid-container');
-const gridNumber = 16;
 
+// Set up grid container reference and hardcode number of grids to test
+const gridContainer = document.querySelector('.grid-container');
+const createButton = document.querySelector('button');
+let gridNumber;
+
+function getGridNumber() {
+  gridNumber = prompt('What size grid do you want? (less than 100)');
+  if (isNaN(gridNumber) || gridNumber > 100) {
+    alert('Sorry, you must enter a number that is less than 100');
+    getGridNumber();
+  }
+}
+
+// Function that will generate the chosen number of grids
 function createGrid(num) {
   gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
   gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
@@ -16,4 +28,8 @@ function createGrid(num) {
     gridContainer.appendChild(grid);
   }
 }
-createGrid(gridNumber);
+
+createButton.addEventListener('click', () => {
+  getGridNumber();
+  createGrid(gridNumber);
+});
