@@ -2,13 +2,15 @@
 
 // Set up grid container reference and hardcode number of grids to test
 const gridContainer = document.querySelector('.grid-container');
-const createButton = document.querySelector('button');
+const createButton = document.querySelector('.create-grid');
 let gridNumber;
 
+// Function gets user input for grid size and ensures the input is
+// a number and less than 100
 function getGridNumber() {
-  gridNumber = prompt('What size grid do you want? (less than 100)');
+  gridNumber = prompt('What size grid do you want? (can\'t exceed 100)');
   if (isNaN(gridNumber) || gridNumber > 100) {
-    alert('Sorry, you must enter a number that is less than 100');
+    alert('Sorry, you must enter a number and cannot exceed 100');
     getGridNumber();
   }
 }
@@ -29,7 +31,14 @@ function createGrid(num) {
   }
 }
 
+function clearGrid(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 createButton.addEventListener('click', () => {
+  clearGrid(gridContainer);
   getGridNumber();
   createGrid(gridNumber);
 });
